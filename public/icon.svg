@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="coralGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f04923" />
+      <stop offset="100%" stop-color="#d93d1a" />
+    </linearGradient>
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000000" flood-opacity="0.15" />
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="128" fill="url(#coralGrad)" filter="url(#softGlow)" />
+  <!-- Plate -->
+  <circle cx="256" cy="256" r="140" fill="#ebeadf" stroke="#ffffff" stroke-width="8" />
+  <circle cx="256" cy="256" r="110" fill="#ffffff" />
+  <!-- Leaf and Sprout (Sustainability) -->
+  <path d="M256 180 C230 220 220 260 256 290 C292 260 282 220 256 180 Z" fill="#22c55e" />
+  <path d="M256 210 Q265 245 256 280" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round" />
+  <!-- Fork & Spoon Accent -->
+  <path d="M190 220 L190 280 M182 220 L182 245 M198 220 L198 245" stroke="#f04923" stroke-width="4" stroke-linecap="round" />
+  <path d="M322 220 Q332 235 322 255 L322 280" stroke="#f04923" stroke-width="4" stroke-linecap="round" />
+</svg>

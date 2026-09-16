@@ -1,0 +1,23 @@
+{
+  "name": "AksesPangan",
+  "short_name": "AksesPangan",
+  "description": "Dari Surplus ke Solusi — Menyelamatkan Makanan, Mengurangi Kelaparan, Menekan Emisi",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ebeadf",
+  "theme_color": "#f04923",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
