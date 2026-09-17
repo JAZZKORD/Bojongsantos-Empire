@@ -108,7 +108,7 @@ function AppRouter() {
   };
 
   return (
-    <div className="min-h-screen text-[#1d1d1f] antialiased bg-white selection:bg-[#0066cc] selection:text-white">
+    <div className="min-h-screen text-[#1d1d1f] antialiased bg-white selection:bg-[#1d1d1f] selection:text-white">
       {showNav && <Navbar currentRoute={route} />}
       <AnimatePresence mode="wait">
         <motion.main

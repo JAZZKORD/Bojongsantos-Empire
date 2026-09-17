@@ -10,7 +10,7 @@ import { BOOKING_STATUS_LABELS } from '@/types';
 import type { Booking, BookingStatus } from '@/types';
 
 export function PenerimaHistory() {
-  const { user } = useAuth();
+  const { user, login } = useAuth();
   const [bookings, setBookings] = useState<Booking[]>([]);
 
   useEffect(() => {
@@ -23,7 +23,30 @@ export function PenerimaHistory() {
     }
   }, [user]);
 
-  if (!user) return null;
+  if (!user) {
+    return (
+      <div className="min-h-[75vh] flex flex-col items-center justify-center p-6 text-center bg-[#f5f5f7]">
+        <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-[#1d1d1f] mb-4 border border-[rgba(0,0,0,0.08)] shadow-sm">
+          <Clock size={32} />
+        </div>
+        <h2 className="text-display-md text-[#1d1d1f] mb-2">Riwayat Booking & Penyelamatan</h2>
+        <p className="text-body-apple text-[#86868b] max-w-md mb-6">
+          Silakan masuk ke akun Anda untuk melihat arsip lengkap makanan yang telah Anda klaim.
+        </p>
+        <div className="flex flex-col sm:flex-row items-center gap-3">
+          <button
+            onClick={() => login('penerima@aksespangan.id', 'penerima123')}
+            className="btn-apple-primary text-sm py-2.5 px-5"
+          >
+            ⚡ Masuk Akun Demo Penerima (1-Klik)
+          </button>
+          <a href="#/login" className="btn-apple-secondary text-sm py-2.5 px-5">
+            Masuk dengan Email
+          </a>
+        </div>
+      </div>
+    );
+  }
 
   const statusBadge = (status: BookingStatus) => {
     switch (status) {

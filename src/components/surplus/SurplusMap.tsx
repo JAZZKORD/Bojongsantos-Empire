@@ -19,12 +19,12 @@ const CATEGORY_COLORS: Record<string, string> = {
   minuman: '#0284c7', // Sky Blue
   kue: '#d97706',
   lauk: '#e11d48',
-  all: '#0066cc',
+  all: '#1d1d1f',
 };
 
 // Create High-End Interactive Leaflet Marker
 function createInteractivePin(item: SurplusItem, isSelected: boolean) {
-  const color = CATEGORY_COLORS[item.foodCategory] || '#0066cc';
+  const color = CATEGORY_COLORS[item.foodCategory] || '#1d1d1f';
   const emoji = FOOD_CATEGORY_EMOJI[item.foodCategory] || '🍽️';
   const priceTag = item.isFree ? 'GRATIS' : formatPrice(item.price);
 
@@ -68,7 +68,7 @@ function createInteractivePin(item: SurplusItem, isSelected: boolean) {
           align-items: center;
           justify-content: center;
           border: 3px solid #ffffff;
-          box-shadow: 0 4px 14px rgba(0,0,0,0.35)${isSelected ? `, 0 0 0 4px rgba(0, 102, 204, 0.4)` : ''};
+          box-shadow: 0 4px 14px rgba(0,0,0,0.35)${isSelected ? `, 0 0 0 4px rgba(0, 0, 0, 0.3)` : ''};
           transition: all 0.2s ease-out;
         ">
           <span style="font-size: ${isSelected ? '20px' : '17px'}; line-height: 1;">${emoji}</span>
@@ -104,7 +104,7 @@ function userLocationIcon() {
         <div style="
           width: 32px;
           height: 32px;
-          background-color: rgba(0, 102, 204, 0.25);
+          background-color: rgba(0, 0, 0, 0.25);
           border-radius: 50%;
           position: absolute;
           animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
@@ -112,7 +112,7 @@ function userLocationIcon() {
         <div style="
           width: 16px;
           height: 16px;
-          background-color: #0066cc;
+          background-color: #1d1d1f;
           border-radius: 50%;
           border: 3px solid #ffffff;
           box-shadow: 0 2px 8px rgba(0,0,0,0.3);
@@ -240,7 +240,7 @@ export default function SurplusMap({
       {/* TOP FLOATING CATEGORY BADGE */}
       <div className="absolute top-4 left-4 z-[999] pointer-events-none">
         <div className="bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[rgba(0,0,0,0.1)] shadow-md flex items-center gap-2 text-xs font-semibold text-[#1d1d1f]">
-          <span className="w-2 h-2 rounded-full bg-[#0066cc] animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-[#1d1d1f] animate-pulse" />
           <span>
             {items.length} Lokasi {selectedCategory === 'all' ? 'Surplus' : FOOD_CATEGORY_LABELS[selectedCategory as FoodCategory] || selectedCategory} di Sekitar Anda
           </span>
@@ -289,7 +289,7 @@ export default function SurplusMap({
               {activeItem.name}
             </h3>
             <p className="text-xs text-[#86868b] mb-3 flex items-center gap-1">
-              <MapPin size={12} className="text-[#0066cc]" />
+              <MapPin size={12} className="text-[#1d1d1f]" />
               <span className="truncate">{activeItem.providerBusinessName} • {activeItem.address}</span>
             </p>
 

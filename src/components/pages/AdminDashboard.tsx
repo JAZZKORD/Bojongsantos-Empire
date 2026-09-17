@@ -140,7 +140,7 @@ export function AdminDashboard() {
                 <div className="text-caption-apple text-[#86868b]">Makanan Terselamatkan</div>
               </div>
               <div className="card-apple-utility bg-white p-5 text-center">
-                <div className="text-display-md font-semibold text-[#0066cc]">{bookings.length}</div>
+                <div className="text-display-md font-semibold text-[#1d1d1f]">{bookings.length}</div>
                 <div className="text-caption-apple text-[#86868b]">Transaksi Tercatat</div>
               </div>
               <div className="card-apple-utility bg-white p-5 text-center">
@@ -192,7 +192,7 @@ export function AdminDashboard() {
                       <div className="text-body-strong text-[#1d1d1f] flex items-center gap-2">
                         {u.name}
                         {u.id === user.id && (
-                          <span className="text-xs text-[#0066cc] font-normal">(Akun Anda)</span>
+                          <span className="text-xs text-[#1d1d1f] font-normal">(Akun Anda)</span>
                         )}
                       </div>
                       <div className="text-caption-apple text-[#86868b]">

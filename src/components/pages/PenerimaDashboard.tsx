@@ -12,6 +12,7 @@ import { formatCountdown, formatPrice, calculateDistance } from '@/lib/utils';
 import { FOOD_CATEGORY_LABELS, FOOD_CATEGORY_EMOJI } from '@/types';
 import { DEFAULT_CENTER } from '@/lib/constants';
 import type { SurplusItem, FoodCategory, Coordinates } from '@/types';
+import { CheckoutModal } from '@/components/surplus/CheckoutModal';
 import dynamic from 'next/dynamic';
 
 // Dynamic import for Leaflet (SSR incompatible)
@@ -29,6 +30,15 @@ export function PenerimaDashboard() {
   const [selectedItem, setSelectedItem] = useState<SurplusItem | null>(null);
   const [isBookingLoading, setIsBookingLoading] = useState(false);
 
+  const refreshItems = async () => {
+    try {
+      const data = await surplusService.getAll();
+      setItems(data);
+    } catch {
+      setItems(getActiveSurplus());
+    }
+  };
+
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -38,15 +48,6 @@ export function PenerimaDashboard() {
     }
     refreshItems();
   }, [user]);
-
-  const refreshItems = async () => {
-    try {
-      const data = await surplusService.getAll();
-      setItems(data);
-    } catch {
-      setItems(getActiveSurplus());
-    }
-  };
 
   // Filter & sort items by distance
   const filteredItems = useMemo(() => {
@@ -83,9 +84,12 @@ export function PenerimaDashboard() {
         recipientPhone: user.phone || '08123456789',
       });
 
-      success('Booking Berhasil! 🎉', `${item.name} telah dipesan. Silakan ambil sebelum batas waktu.`);
+      success('Pemesanan Berhasil! 🎉', `${item.name} telah dipesan. Dialihkan ke tiket pesanan Anda...`);
       setSelectedItem(null);
       refreshItems();
+      setTimeout(() => {
+        window.location.hash = '#/penerima/booking';
+      }, 500);
     } catch (err: any) {
       warning('Perhatian', err.message || 'Item tidak dapat dipesan saat ini');
       refreshItems();
@@ -139,8 +143,8 @@ export function PenerimaDashboard() {
               onClick={() => setViewMode('list')}
               className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
                 viewMode === 'list'
-                  ? 'bg-[#0066cc] text-white'
-                  : 'text-[#1d1d1f] hover:text-[#0066cc]'
+                  ? 'bg-[#1d1d1f] text-white'
+                  : 'text-[#1d1d1f] hover:text-[#86868b]'
               }`}
             >
               <List size={16} /> Daftar ({filteredItems.length})
@@ -149,8 +153,8 @@ export function PenerimaDashboard() {
               onClick={() => setViewMode('map')}
               className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
                 viewMode === 'map'
-                  ? 'bg-[#0066cc] text-white'
-                  : 'text-[#1d1d1f] hover:text-[#0066cc]'
+                  ? 'bg-[#1d1d1f] text-white'
+                  : 'text-[#1d1d1f] hover:text-[#86868b]'
               }`}
             >
               <Map size={16} /> Peta
@@ -246,7 +250,7 @@ export function PenerimaDashboard() {
                         {item.name}
                       </h3>
                       <div className="text-caption-apple text-[#86868b] mb-3 flex items-center gap-1.5">
-                        <MapPin size={13} className="text-[#0066cc]" />
+                        <MapPin size={13} className="text-[#1d1d1f]" />
                         <span className="line-clamp-1">
                           {item.providerBusinessName} • {Math.round(item.distance * 10) / 10} km
                         </span>
@@ -282,81 +286,14 @@ export function PenerimaDashboard() {
         )}
       </div>
 
-      {/* Detail & Booking Sheet Modal (Frosted Glass backdrop, Apple card container) */}
-      <AnimatePresence>
-        {selectedItem && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-white rounded-[22px] max-w-lg w-full p-6 sm:p-8 border border-[rgba(0,0,0,0.08)] shadow-2xl relative"
-            >
-              {/* Close button */}
-              <button
-                onClick={() => setSelectedItem(null)}
-                className="absolute top-5 right-5 w-8 h-8 rounded-full bg-[#f5f5f7] flex items-center justify-center text-[#86868b] hover:text-[#1d1d1f]"
-              >
-                <X size={16} />
-              </button>
-
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-3xl p-3 bg-[#f5f5f7] rounded-[14px]">
-                  {FOOD_CATEGORY_EMOJI[selectedItem.foodCategory] || '🍽️'}
-                </span>
-                <div>
-                  <h2 className="text-tagline text-[#1d1d1f]">{selectedItem.name}</h2>
-                  <div className="text-caption-apple text-[#86868b]">
-                    {selectedItem.providerBusinessName} • {selectedItem.address}
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-3 bg-[#f5f5f7] rounded-[14px] p-4 mb-6 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-[#86868b]">Jumlah Tersedia:</span>
-                  <span className="font-semibold text-[#1d1d1f]">{selectedItem.quantity} kg ({selectedItem.portionCount} porsi)</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-[#86868b]">Biaya:</span>
-                  <span className="font-semibold text-[#0066cc]">
-                    {selectedItem.isFree ? 'Gratis (Donasi Makanan)' : formatPrice(selectedItem.price)}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-[#86868b]">Batas Waktu Pengambilan:</span>
-                  <span className="font-semibold text-[#ff9500]">
-                    {formatCountdown(selectedItem.expiryTime)} lagi
-                  </span>
-                </div>
-              </div>
-
-              <div className="mb-6">
-                <h4 className="text-caption-strong text-[#1d1d1f] mb-1">Deskripsi Makanan</h4>
-                <p className="text-caption-apple text-[#86868b] m-0">
-                  {selectedItem.description}
-                </p>
-              </div>
-
-              <div className="flex gap-3">
-                <button
-                  onClick={() => setSelectedItem(null)}
-                  className="btn-apple-secondary flex-1 text-sm py-2.5"
-                >
-                  Batal
-                </button>
-                <button
-                  onClick={() => handleBook(selectedItem)}
-                  disabled={isBookingLoading}
-                  className="btn-apple-primary flex-1 text-sm py-2.5"
-                >
-                  {isBookingLoading ? 'Memproses...' : 'Ambil Makanan Ini'}
-                </button>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+      {/* Interactive E-Commerce Checkout Modal with Safety Specs */}
+      <CheckoutModal
+        item={selectedItem}
+        isOpen={!!selectedItem}
+        onClose={() => setSelectedItem(null)}
+        onConfirmCheckout={handleBook}
+        isLoading={isBookingLoading}
+      />
     </div>
   );
 }

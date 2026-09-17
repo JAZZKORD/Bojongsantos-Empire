@@ -12,7 +12,7 @@ import { FOOD_CATEGORY_LABELS, FOOD_CATEGORY_EMOJI } from '@/types';
 import type { SurplusItem, FoodCategory } from '@/types';
 
 export function PenyediaSurplus() {
-  const { user } = useAuth();
+  const { user, login } = useAuth();
   const { success, error } = useNotification();
   const [items, setItems] = useState<SurplusItem[]>([]);
   const [showForm, setShowForm] = useState(false);
@@ -43,6 +43,31 @@ export function PenyediaSurplus() {
   useEffect(() => {
     refreshItems();
   }, [user]);
+
+  if (!user) {
+    return (
+      <div className="min-h-[75vh] flex flex-col items-center justify-center p-6 text-center bg-[#f5f5f7]">
+        <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-[#1d1d1f] mb-4 border border-[rgba(0,0,0,0.08)] shadow-sm">
+          <Package size={32} />
+        </div>
+        <h2 className="text-display-md text-[#1d1d1f] mb-2">Kelola Inventaris Surplus</h2>
+        <p className="text-body-apple text-[#86868b] max-w-md mb-6">
+          Silakan masuk ke akun Mitra Penyedia Anda untuk menambah dan mengelola stok makanan surplus.
+        </p>
+        <div className="flex flex-col sm:flex-row items-center gap-3">
+          <button
+            onClick={() => login('penyedia@aksespangan.id', 'penyedia123')}
+            className="btn-apple-primary text-sm py-2.5 px-5"
+          >
+            ⚡ Masuk Akun Demo Penyedia (1-Klik)
+          </button>
+          <a href="#/login" className="btn-apple-secondary text-sm py-2.5 px-5">
+            Masuk dengan Email
+          </a>
+        </div>
+      </div>
+    );
+  }
 
   const resetForm = () => {
     setName('');
@@ -241,7 +266,7 @@ export function PenyediaSurplus() {
                           type="button"
                           onClick={() => setIsFree(true)}
                           className={`flex-1 py-2 rounded-[11px] text-xs font-semibold border ${
-                            isFree ? 'bg-[#0066cc] text-white border-[#0066cc]' : 'bg-[#f5f5f7] text-[#1d1d1f] border-transparent'
+                            isFree ? 'bg-[#1d1d1f] text-white border-[#1d1d1f]' : 'bg-[#f5f5f7] text-[#1d1d1f] border-transparent'
                           }`}
                         >
                           Gratis (Donasi)
@@ -250,7 +275,7 @@ export function PenyediaSurplus() {
                           type="button"
                           onClick={() => setIsFree(false)}
                           className={`flex-1 py-2 rounded-[11px] text-xs font-semibold border ${
-                            !isFree ? 'bg-[#0066cc] text-white border-[#0066cc]' : 'bg-[#f5f5f7] text-[#1d1d1f] border-transparent'
+                            !isFree ? 'bg-[#1d1d1f] text-white border-[#1d1d1f]' : 'bg-[#f5f5f7] text-[#1d1d1f] border-transparent'
                           }`}
                         >
                           Berbayar
@@ -373,7 +398,7 @@ export function PenyediaSurplus() {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => openEditForm(item)}
-                      className="p-1.5 text-[#0066cc] hover:bg-[#0066cc]/10 rounded-full transition-colors"
+                      className="p-1.5 text-[#1d1d1f] hover:bg-[#1d1d1f]/10 rounded-full transition-colors"
                       title="Edit"
                     >
                       <Edit size={16} />

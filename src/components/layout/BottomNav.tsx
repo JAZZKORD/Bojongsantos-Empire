@@ -57,14 +57,14 @@ export function BottomNav() {
             >
               <div
                 className={`w-9 h-9 rounded-full flex items-center justify-center transition-colors ${
-                  isActive ? 'bg-[#0066cc] text-white' : 'text-[#86868b]'
+                  isActive ? 'bg-[#1d1d1f] text-white' : 'text-[#86868b]'
                 }`}
               >
                 <Icon size={18} />
               </div>
               <span
                 className={`text-[11px] font-medium tracking-tight ${
-                  isActive ? 'text-[#0066cc] font-semibold' : 'text-[#86868b]'
+                  isActive ? 'text-[#1d1d1f] font-semibold' : 'text-[#86868b]'
                 }`}
               >
                 {item.label}

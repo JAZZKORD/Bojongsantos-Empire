@@ -10,7 +10,7 @@ import { BOOKING_STATUS_LABELS } from '@/types';
 import type { Booking, BookingStatus } from '@/types';
 
 export function PenyediaHistory() {
-  const { user } = useAuth();
+  const { user, login } = useAuth();
   const [bookings, setBookings] = useState<Booking[]>([]);
 
   useEffect(() => {
@@ -23,7 +23,30 @@ export function PenyediaHistory() {
     }
   }, [user]);
 
-  if (!user) return null;
+  if (!user) {
+    return (
+      <div className="min-h-[75vh] flex flex-col items-center justify-center p-6 text-center bg-[#f5f5f7]">
+        <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-[#1d1d1f] mb-4 border border-[rgba(0,0,0,0.08)] shadow-sm">
+          <Package size={32} />
+        </div>
+        <h2 className="text-display-md text-[#1d1d1f] mb-2">Riwayat Penyaluran Surplus</h2>
+        <p className="text-body-apple text-[#86868b] max-w-md mb-6">
+          Silakan masuk ke akun Mitra Penyedia Anda untuk melihat arsip lengkap stok surplus yang telah tersalurkan.
+        </p>
+        <div className="flex flex-col sm:flex-row items-center gap-3">
+          <button
+            onClick={() => login('penyedia@aksespangan.id', 'penyedia123')}
+            className="btn-apple-primary text-sm py-2.5 px-5"
+          >
+            ⚡ Masuk Akun Demo Penyedia (1-Klik)
+          </button>
+          <a href="#/login" className="btn-apple-secondary text-sm py-2.5 px-5">
+            Masuk dengan Email
+          </a>
+        </div>
+      </div>
+    );
+  }
 
   const statusBadge = (status: BookingStatus) => {
     switch (status) {
@@ -84,7 +107,7 @@ export function PenyediaHistory() {
             <div className="text-[11px] uppercase font-semibold text-[#86868b] tracking-wider mb-1">
               Total Pesanan Selesai
             </div>
-            <div className="text-display-md text-[#0066cc] font-bold">
+            <div className="text-display-md text-[#1d1d1f] font-bold">
               {bookings.filter((b) => b.status === 'diambil').length} <span className="text-sm font-normal text-[#86868b]">transaksi</span>
             </div>
             <div className="text-caption-apple text-[#86868b] mt-1">

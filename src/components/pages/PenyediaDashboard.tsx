@@ -12,7 +12,7 @@ import { FOOD_CATEGORY_EMOJI } from '@/types';
 import type { SurplusItem, Booking } from '@/types';
 
 export function PenyediaDashboard() {
-  const { user } = useAuth();
+  const { user, login } = useAuth();
   const [surplus, setSurplus] = useState<SurplusItem[]>([]);
   const [bookings, setBookings] = useState<Booking[]>([]);
 
@@ -35,7 +35,33 @@ export function PenyediaDashboard() {
     load();
   }, [user]);
 
-  if (!user) return null;
+  if (!user) {
+    return (
+      <div className="min-h-[75vh] flex flex-col items-center justify-center p-6 text-center bg-[#f5f5f7]">
+        <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-[#1d1d1f] mb-4 border border-[rgba(0,0,0,0.08)] shadow-sm">
+          <Store size={32} />
+        </div>
+        <h2 className="text-display-md text-[#1d1d1f] mb-2">Portal Mitra Penyedia Makanan</h2>
+        <p className="text-body-apple text-[#86868b] max-w-md mb-6">
+          Kelola stok makanan surplus dan pantau pesanan pengambilan dari masyarakat secara real-time.
+        </p>
+        <div className="flex flex-col sm:flex-row items-center gap-3">
+          <button
+            onClick={() => login('penyedia@aksespangan.id', 'penyedia123')}
+            className="btn-apple-primary text-sm py-2.5 px-5"
+          >
+            ⚡ Masuk Akun Demo Penyedia (1-Klik)
+          </button>
+          <a href="#/login" className="btn-apple-secondary text-sm py-2.5 px-5">
+            Masuk dengan Email
+          </a>
+          <a href="#/register" className="btn-apple-pearl text-sm py-2.5 px-5">
+            Daftar Mitra Usaha
+          </a>
+        </div>
+      </div>
+    );
+  }
 
   const activeItems = surplus.filter((s) => s.status === 'active');
   const pendingBookings = bookings.filter((b) => b.status === 'menunggu');
@@ -43,7 +69,7 @@ export function PenyediaDashboard() {
   const totalKg = completedBookings.reduce((sum, b) => sum + b.quantity, 0);
 
   const stats = [
-    { label: 'Surplus Aktif', value: activeItems.length, unit: 'item', icon: Package, color: '#0066cc' },
+    { label: 'Surplus Aktif', value: activeItems.length, unit: 'item', icon: Package, color: '#1d1d1f' },
     { label: 'Booking Masuk', value: pendingBookings.length, unit: 'pesanan', icon: ClipboardList, color: '#ff9500' },
     { label: 'Makanan Disalurkan', value: totalKg, unit: 'kg', icon: CheckCircle, color: '#34c759' },
     { label: 'Total Transaksi', value: completedBookings.length, unit: 'kali', icon: TrendingUp, color: '#1d1d1f' },
@@ -55,7 +81,7 @@ export function PenyediaDashboard() {
         {/* Welcome Section */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>
-            <span className="text-caption-strong text-[#0066cc] uppercase tracking-wide mb-1 inline-block">
+            <span className="text-caption-strong text-[#1d1d1f] uppercase tracking-wide mb-1 inline-block">
               Portal Mitra Usaha
             </span>
             <h1 className="text-display-lg text-[#1d1d1f]">

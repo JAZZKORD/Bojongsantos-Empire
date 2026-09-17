@@ -66,7 +66,7 @@ export function LoginPage() {
           {/* Quick Demo Selector Chips */}
           <div className="mb-6 pb-5 border-b border-[rgba(0,0,0,0.06)]">
             <div className="text-caption-strong text-[#1d1d1f] mb-2 flex items-center gap-1.5">
-              <Sparkles size={14} className="text-[#0066cc]" />
+              <Sparkles size={14} className="text-[#1d1d1f]" />
               Akun Demo Cepat (1-Klik):
             </div>
             <div className="flex flex-wrap gap-2">

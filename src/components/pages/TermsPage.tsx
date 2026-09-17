@@ -44,7 +44,7 @@ export function TermsPage() {
       <div className="apple-container-editorial">
         {/* Header */}
         <div className="mb-10 text-center sm:text-left">
-          <span className="text-caption-strong text-[#0066cc] uppercase tracking-wide mb-2 inline-block">
+          <span className="text-caption-strong text-[#1d1d1f] uppercase tracking-wide mb-2 inline-block">
             Dokumentasi & Regulasi
           </span>
           <h1 className="text-display-lg text-[#1d1d1f] mb-3">
@@ -58,7 +58,7 @@ export function TermsPage() {
         {/* Food Safety 4-Pillar Grid */}
         <div className="card-apple-utility bg-white p-6 sm:p-8 mb-8">
           <h2 className="text-tagline text-[#1d1d1f] mb-2 flex items-center gap-2">
-            <Shield size={20} className="text-[#0066cc]" />
+            <Shield size={20} className="text-[#1d1d1f]" />
             4 Kaidah Utama Keamanan Makanan Siap Santap
           </h2>
           <p className="text-caption-apple text-[#86868b] mb-6">
@@ -79,7 +79,7 @@ export function TermsPage() {
             </div>
 
             <div className="p-5 rounded-[14px] bg-[#f5f5f7] flex items-start gap-3.5">
-              <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center text-[#0066cc] flex-shrink-0 shadow-sm">
+              <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center text-[#1d1d1f] flex-shrink-0 shadow-sm">
                 <Clock size={18} />
               </div>
               <div>
@@ -130,7 +130,7 @@ export function TermsPage() {
         {/* Terms Accordion (Apple Support Style) */}
         <div className="card-apple-utility bg-white p-6 sm:p-8">
           <h2 className="text-tagline text-[#1d1d1f] mb-6 flex items-center gap-2">
-            <BookOpen size={20} className="text-[#0066cc]" />
+            <BookOpen size={20} className="text-[#1d1d1f]" />
             Pasal Ketentuan Penggunaan Platform
           </h2>
 
@@ -141,7 +141,7 @@ export function TermsPage() {
                 <div key={index} className="py-4">
                   <button
                     onClick={() => toggleSection(index)}
-                    className="w-full text-left flex items-center justify-between gap-4 font-semibold text-[17px] text-[#1d1d1f] hover:text-[#0066cc] transition-colors"
+                    className="w-full text-left flex items-center justify-between gap-4 font-semibold text-[17px] text-[#1d1d1f] hover:text-[#86868b] transition-colors"
                   >
                     <span>{item.title}</span>
                     <motion.div

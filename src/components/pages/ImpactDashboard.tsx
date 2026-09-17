@@ -56,7 +56,7 @@ export function ImpactDashboard() {
         {/* 4 Core Metric Cards (Apple Store Utility Cards style) */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <div className="card-apple-utility text-center p-6 bg-white">
-            <div className="w-10 h-10 rounded-full bg-[#f5f5f7] flex items-center justify-center mx-auto mb-3 text-[#0066cc]">
+            <div className="w-10 h-10 rounded-full bg-[#f5f5f7] flex items-center justify-center mx-auto mb-3 text-[#1d1d1f]">
               <Package size={20} />
             </div>
             <div className="text-display-md text-[#1d1d1f] font-semibold mb-0.5">
@@ -76,10 +76,10 @@ export function ImpactDashboard() {
           </div>
 
           <div className="card-apple-utility text-center p-6 bg-white">
-            <div className="w-10 h-10 rounded-full bg-[#0066cc]/10 flex items-center justify-center mx-auto mb-3 text-[#0066cc]">
+            <div className="w-10 h-10 rounded-full bg-[#1d1d1f]/10 flex items-center justify-center mx-auto mb-3 text-[#1d1d1f]">
               <Leaf size={20} />
             </div>
-            <div className="text-display-md text-[#0066cc] font-semibold mb-0.5">
+            <div className="text-display-md text-[#1d1d1f] font-semibold mb-0.5">
               {impact.totalCO2eSaved.toLocaleString('id-ID')} <span className="text-sm font-normal text-[#86868b]">kg</span>
             </div>
             <div className="text-caption-apple text-[#86868b]">Emisi CO₂e Dihindari</div>
@@ -117,7 +117,7 @@ export function ImpactDashboard() {
             </div>
 
             <div className="flex items-start gap-4 p-5 rounded-[14px] bg-[#f5f5f7]">
-              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#0066cc] flex-shrink-0 shadow-sm">
+              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#1d1d1f] flex-shrink-0 shadow-sm">
                 <Car size={22} />
               </div>
               <div>
@@ -181,7 +181,7 @@ export function ImpactDashboard() {
                   }}
                   formatter={(value: any) => [`${value} kg diselamatkan`, 'Makanan']}
                 />
-                <Bar dataKey="kgSaved" fill="#0066cc" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="kgSaved" fill="#1d1d1f" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>

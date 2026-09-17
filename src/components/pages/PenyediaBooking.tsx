@@ -12,7 +12,7 @@ import { BOOKING_STATUS_LABELS } from '@/types';
 import type { Booking } from '@/types';
 
 export function PenyediaBooking() {
-  const { user } = useAuth();
+  const { user, login } = useAuth();
   const { success, warning } = useNotification();
   const [bookings, setBookings] = useState<Booking[]>([]);
 
@@ -62,7 +62,30 @@ export function PenyediaBooking() {
     refresh();
   };
 
-  if (!user) return null;
+  if (!user) {
+    return (
+      <div className="min-h-[75vh] flex flex-col items-center justify-center p-6 text-center bg-[#f5f5f7]">
+        <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-[#1d1d1f] mb-4 border border-[rgba(0,0,0,0.08)] shadow-sm">
+          <Clock size={32} />
+        </div>
+        <h2 className="text-display-md text-[#1d1d1f] mb-2">Daftar Pesanan & Pengambilan</h2>
+        <p className="text-body-apple text-[#86868b] max-w-md mb-6">
+          Silakan masuk ke akun Mitra Penyedia Anda untuk mengelola permintaan klaim makanan dari masyarakat.
+        </p>
+        <div className="flex flex-col sm:flex-row items-center gap-3">
+          <button
+            onClick={() => login('penyedia@aksespangan.id', 'penyedia123')}
+            className="btn-apple-primary text-sm py-2.5 px-5"
+          >
+            ⚡ Masuk Akun Demo Penyedia (1-Klik)
+          </button>
+          <a href="#/login" className="btn-apple-secondary text-sm py-2.5 px-5">
+            Masuk dengan Email
+          </a>
+        </div>
+      </div>
+    );
+  }
 
   const pending = bookings.filter((b) => b.status === 'menunggu');
   const past = bookings.filter((b) => b.status !== 'menunggu');

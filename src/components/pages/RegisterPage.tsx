@@ -99,7 +99,7 @@ export function RegisterPage() {
               }}
               className={`py-2 px-4 rounded-full text-xs font-semibold tracking-tight transition-all ${
                 role === 'penerima'
-                  ? 'bg-[#0066cc] text-white shadow-sm'
+                  ? 'bg-[#1d1d1f] text-white shadow-sm'
                   : 'text-[#86868b] hover:text-[#1d1d1f]'
               }`}
             >
@@ -113,7 +113,7 @@ export function RegisterPage() {
               }}
               className={`py-2 px-4 rounded-full text-xs font-semibold tracking-tight transition-all ${
                 role === 'penyedia'
-                  ? 'bg-[#0066cc] text-white shadow-sm'
+                  ? 'bg-[#1d1d1f] text-white shadow-sm'
                   : 'text-[#86868b] hover:text-[#1d1d1f]'
               }`}
             >

@@ -126,9 +126,9 @@ export function LandingPage() {
 
             {/* Headline with Playfair Display & Cormorant Garamond Italic */}
             <h1 className="font-luxury-headline text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.08] mb-6">
-              Tiada pangan <br />
+              Rescue Food. <br />
               <span className="font-luxury-italic font-normal italic text-[#eeeeee]">
-                yang tersia.
+                Nourish Lives.
               </span>
             </h1>
 
